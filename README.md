@@ -2,7 +2,7 @@
 
 [![npm plugin](https://img.shields.io/npm/v/docusaurus-plugin-ask-ai?label=docusaurus-plugin-ask-ai&color=0f766e)](https://www.npmjs.com/package/docusaurus-plugin-ask-ai)
 [![npm theme](https://img.shields.io/npm/v/docusaurus-theme-ask-ai?label=docusaurus-theme-ask-ai&color=0f766e)](https://www.npmjs.com/package/docusaurus-theme-ask-ai)
-[![license](https://img.shields.io/github/license/mrkhachaturov/docusaurus-ask-ai)](LICENSE)
+[![license](https://img.shields.io/github/license/mrkhachaturov/docusaurus-plugin-ask-ai)](https://github.com/mrkhachaturov/docusaurus-plugin-ask-ai/blob/main/LICENSE)
 
 > AI-ready Docusaurus docs: `llms.txt` generation, per-page markdown output, and a floating "Use with AI" button.
 

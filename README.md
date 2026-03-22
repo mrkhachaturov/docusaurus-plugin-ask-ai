@@ -1,79 +1,100 @@
 # docusaurus-ask-ai
 
-Fork of [`docusaurus-plugin-llms`](https://github.com/rachfop/docusaurus-plugin-llms) extended into a two-package Docusaurus toolkit:
+[![npm plugin](https://img.shields.io/npm/v/docusaurus-plugin-ask-ai?label=docusaurus-plugin-ask-ai&color=0f766e)](https://www.npmjs.com/package/docusaurus-plugin-ask-ai)
+[![npm theme](https://img.shields.io/npm/v/docusaurus-theme-ask-ai?label=docusaurus-theme-ask-ai&color=0f766e)](https://www.npmjs.com/package/docusaurus-theme-ask-ai)
+[![license](https://img.shields.io/github/license/mrkhachaturov/docusaurus-ask-ai)](LICENSE)
 
-- `docusaurus-plugin-ask-ai`: build-time generation of `llms.txt`, `llms-full.txt`, per-page markdown files, and `ask-ai-manifest.json`
-- `docusaurus-theme-ask-ai`: runtime floating "Use with AI" button for Docusaurus sites
+> AI-ready Docusaurus docs: `llms.txt` generation, per-page markdown output, and a floating "Use with AI" button.
 
-This repository keeps the upstream LLM-file generation work and adds a Docusaurus theme modeled after the UX of `mkdocs-ask-ai`.
+Forked from [`docusaurus-plugin-llms`](https://github.com/rachfop/docusaurus-plugin-llms), then expanded into a two-package toolkit for modern Docusaurus documentation sites.
 
-## What This Fork Adds
+## ✨ What This Repo Is
 
-Compared to upstream `docusaurus-plugin-llms`, this fork adds:
+This repo is no longer just the upstream plugin with a few patches.
 
-- npm workspace monorepo layout with separate plugin and theme packages
-- a Docusaurus theme package for a floating Ask AI button
-- per-page route gating via `ask-ai-manifest.json`
-- UI actions for:
-  - copy page as markdown
-  - view page as markdown
-  - open the current page in configured AI providers
-  - open `llms.txt`
-- configurable provider list with built-in and custom icons
-- packaging for compiled theme files under `lib/theme` so the package works when installed from npm/tarball
+It now contains:
 
-It also preserves the upstream plugin features:
+- `docusaurus-plugin-ask-ai`: build-time generation for `llms.txt`, `llms-full.txt`, `*.md`, and `ask-ai-manifest.json`
+- `docusaurus-theme-ask-ai`: runtime UI for a floating Ask AI button on supported pages
 
-- `llms.txt` generation
-- `llms-full.txt` generation
-- custom LLM files by glob pattern
-- path transformation
-- document ordering
-- blog inclusion
-- frontmatter preservation for generated markdown files
-- content cleanup options like import stripping and duplicate-heading removal
+If you want Docusaurus docs that are both:
 
-## Packages
+- easier for LLMs to crawl and consume
+- easier for humans to send directly into ChatGPT, Claude, and similar tools
+
+this fork is aimed at that use case.
+
+## 🚀 Highlights
+
+- `llms.txt` and `llms-full.txt` generation
+- per-page markdown output for doc pages
+- floating "Use with AI" button with two position modes (`fixed` or `breadcrumb`)
+- copy-as-markdown and view-as-markdown actions
+- configurable AI providers with `{prompt}` URL templates
+- build-time route manifest for hiding the button on unsupported pages
+- preserved upstream features like ordering, path transforms, blog inclusion, and custom LLM files
+
+## 📦 Packages
 
 ### `docusaurus-plugin-ask-ai`
 
-Build-time plugin that scans docs content and can generate:
+Build-time package for generating AI-facing static artifacts.
+
+Outputs can include:
 
 - `llms.txt`
 - `llms-full.txt`
-- individual `*.md` files for pages
-- `ask-ai-manifest.json` for theme route gating
-- custom `llms-*.txt` outputs
+- page-level markdown files
+- `ask-ai-manifest.json`
+- custom `llms-*.txt` files
 
-Package path:
-[`packages/docusaurus-plugin-ask-ai`](/home/openclaw/astromech/3rdparty-src/docusaurus-plugin-aski-ai/packages/docusaurus-plugin-ask-ai)
+Path:
+[`packages/docusaurus-plugin-ask-ai`](./packages/docusaurus-plugin-ask-ai)
 
 ### `docusaurus-theme-ask-ai`
 
-Theme package that injects a floating "Use with AI" button through `@theme/Root`.
+Theme package that injects an Ask AI button into doc pages.
 
-Package path:
-[`packages/docusaurus-theme-ask-ai`](/home/openclaw/astromech/3rdparty-src/docusaurus-plugin-aski-ai/packages/docusaurus-theme-ask-ai)
+Two position modes:
 
-The theme:
+- `fixed` (default): floating button at the bottom-right of the viewport
+- `breadcrumb`: inline button in the breadcrumb row, right-aligned
 
-- checks `ask-ai-manifest.json` before rendering
-- stays hidden on routes without generated markdown
-- fetches the page markdown on demand
-- builds a prompt using page title plus markdown content
-- opens configured provider URLs with `{prompt}` substitution
+It:
 
-## Status
+- checks `ask-ai-manifest.json` to only render on pages with generated markdown
+- fetches the current page markdown on demand
+- builds an AI prompt from the page title and markdown content
+- opens configured providers using `{prompt}` substitution
+- swizzles `DocBreadcrumbs` (breadcrumb mode) or `Root` (fixed mode) via `@theme-init`
 
-This repo is no longer just a direct upstream mirror. It is an opinionated fork focused on:
+Path:
+[`packages/docusaurus-theme-ask-ai`](./packages/docusaurus-theme-ask-ai)
 
-- AI-ready Docusaurus documentation
-- static-hosting compatibility
-- llms.txt generation plus end-user Ask AI UI
+## 🆕 What This Fork Added
 
-If you only want the original build-time `llms.txt` plugin with no UI, upstream may still be the better reference point.
+Compared to upstream `docusaurus-plugin-llms`, this fork adds:
 
-## Installation
+- a monorepo with separate plugin and theme packages
+- a user-facing Docusaurus theme package
+- `ask-ai-manifest.json` generation for route gating
+- a floating AI actions menu inspired by `mkdocs-ask-ai`
+- breadcrumb-inline position mode as alternative to floating button
+- packaging of compiled theme assets under `lib/theme` for real npm installs
+
+Upstream functionality still kept here:
+
+- `llms.txt` generation
+- `llms-full.txt` generation
+- custom LLM files by pattern
+- document ordering controls
+- path transformation
+- blog inclusion
+- import stripping
+- duplicate heading cleanup
+- frontmatter preservation for generated markdown files
+
+## 🛠 Installation
 
 ### Plugin only
 
@@ -116,7 +137,7 @@ module.exports = {
   themes: ['docusaurus-theme-ask-ai'],
   themeConfig: {
     askAi: {
-      buttonText: 'Use with AI',
+      position: 'breadcrumb', // or 'fixed' (default)
       providers: [
         {
           name: 'ChatGPT',
@@ -134,41 +155,40 @@ module.exports = {
 };
 ```
 
-Important:
+## ⚠️ Important
 
-- the theme expects generated markdown files for full functionality
-- enable `generateMarkdownFiles: true` when using the theme
-- the theme uses `ask-ai-manifest.json` to decide where the button should appear
+- Enable `generateMarkdownFiles: true` when using the theme.
+- The theme uses `ask-ai-manifest.json` to decide where the button should appear.
+- The published theme package ships compiled files from `lib/theme`, not raw TSX.
 
-## Plugin Options
+## 🎛 Plugin Options
 
-The plugin keeps the upstream option surface. Common options:
+The plugin keeps the upstream option surface. Most commonly used options:
 
-| Option | Default | Notes |
+| Option | Default | What it does |
 |---|---:|---|
-| `generateLLMsTxt` | `true` | Generate `llms.txt` |
-| `generateLLMsFullTxt` | `true` | Generate `llms-full.txt` |
-| `generateMarkdownFiles` | `false` | Required for theme page actions |
-| `docsDir` | `'docs'` | Docs source directory |
-| `includeBlog` | `false` | Include blog content |
-| `ignoreFiles` | `[]` | Glob patterns to exclude |
-| `includeOrder` | `[]` | Ordered include patterns |
-| `includeUnmatchedLast` | `true` | Append unmatched files |
-| `pathTransformation` | `undefined` | Rewrite output URLs |
-| `customLLMFiles` | `[]` | Additional generated LLM files |
-| `excludeImports` | `false` | Remove MDX imports from content |
-| `removeDuplicateHeadings` | `false` | Trim repeated title/heading content |
-| `keepFrontMatter` | `[]` | Preserve selected frontmatter keys in generated markdown |
-| `preserveDirectoryStructure` | `true` | Keep docs directory structure for generated markdown |
-| `processingBatchSize` | `100` | Large-site memory control |
-| `logLevel` | `'normal'` | `quiet`, `normal`, `verbose` |
+| `generateLLMsTxt` | `true` | Generates `llms.txt` |
+| `generateLLMsFullTxt` | `true` | Generates `llms-full.txt` |
+| `generateMarkdownFiles` | `false` | Generates page markdown files |
+| `docsDir` | `'docs'` | Sets the docs source directory |
+| `includeBlog` | `false` | Includes blog content |
+| `ignoreFiles` | `[]` | Excludes matching files |
+| `includeOrder` | `[]` | Controls document ordering |
+| `customLLMFiles` | `[]` | Generates extra LLM files |
+| `excludeImports` | `false` | Removes MDX imports |
+| `removeDuplicateHeadings` | `false` | Cleans repeated title text |
+| `keepFrontMatter` | `[]` | Preserves selected frontmatter keys |
+| `preserveDirectoryStructure` | `true` | Keeps nested output structure |
+| `processingBatchSize` | `100` | Controls large-site batching |
+| `logLevel` | `'normal'` | Logging verbosity |
 
-## Theme Configuration
+## 🎨 Theme Config
 
 ```js
 themeConfig: {
   askAi: {
     buttonText: 'Use with AI',
+    position: 'fixed', // 'fixed' (floating bottom-right) or 'breadcrumb' (inline in breadcrumb row)
     showCopyMarkdown: true,
     showViewMarkdown: true,
     showLlmsTxt: true,
@@ -181,6 +201,11 @@ themeConfig: {
         icon: 'chatgpt',
         description: 'Chat about this page with ChatGPT',
       },
+      {
+        name: 'Claude',
+        url: 'https://claude.ai/new?q={prompt}',
+        icon: 'claude',
+      },
     ],
   },
 }
@@ -188,12 +213,71 @@ themeConfig: {
 
 Provider fields:
 
-- `name`: menu label
+- `name`: provider label
 - `url`: URL template containing `{prompt}`
-- `icon`: built-in key (`chatgpt`, `claude`) or custom path/URL/data URI
+- `icon`: built-in key or custom image path / URL / data URI
 - `description`: optional subtitle
 
-## Repository Layout
+## 🧠 How It Works
+
+### Build time
+
+The plugin:
+
+1. scans docs content
+2. processes markdown and MDX
+3. generates `llms.txt`
+4. generates `llms-full.txt`
+5. optionally emits per-page `.md` files
+6. writes `ask-ai-manifest.json`
+
+### Runtime
+
+The theme:
+
+1. loads the manifest
+2. checks if the current route has markdown
+3. renders the floating button only on supported pages
+4. fetches markdown only when the user clicks an action
+
+## 🧪 Development
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+Build all workspaces:
+
+```bash
+npm run build
+```
+
+Run tests:
+
+```bash
+npm test
+```
+
+UX inspired by [`mkdocs-ask-ai`](https://github.com/mrkhachaturov/mkdocs-ask-ai).
+
+## 🧬 Upstream Lineage
+
+Started from:
+
+- repo: `rachfop/docusaurus-plugin-llms`
+- package: `docusaurus-plugin-llms`
+
+This fork then:
+
+1. renamed the plugin package to `docusaurus-plugin-ask-ai`
+2. added `docusaurus-theme-ask-ai`
+3. added `ask-ai-manifest.json`
+4. added the Ask AI floating-button UX
+5. added packaging for compiled theme runtime assets
+
+## 📁 Repo Layout
 
 ```text
 docusaurus-plugin-aski-ai/
@@ -205,53 +289,6 @@ docusaurus-plugin-aski-ai/
 └── README.md
 ```
 
-## Development
+## 📄 License
 
-Install workspace dependencies:
-
-```bash
-npm install
-```
-
-Build all packages:
-
-```bash
-npm run build
-```
-
-Run workspace tests:
-
-```bash
-npm test
-```
-
-Theme package notes:
-
-- theme source lives under `packages/docusaurus-theme-ask-ai/src/theme`
-- the published package uses compiled files under `lib/theme`
-- `styles.module.css` is copied into `lib/theme/Root/` during build
-
-## Upstream Lineage
-
-This repository started as a fork of:
-
-- upstream repo: `rachfop/docusaurus-plugin-llms`
-- upstream package: `docusaurus-plugin-llms`
-
-Main fork changes:
-
-1. renamed the plugin package to `docusaurus-plugin-ask-ai`
-2. added the new `docusaurus-theme-ask-ai` package
-3. added `ask-ai-manifest.json` generation
-4. added the Ask AI floating-button UX
-5. changed packaging to support compiled theme assets for npm distribution
-
-## Related References
-
-- design spec: [`docs/specs/2026-03-22-docusaurus-ask-ai-design.md`](/home/openclaw/astromech/docs/specs/2026-03-22-docusaurus-ask-ai-design.md)
-- implementation plan: [`docs/specs/2026-03-22-docusaurus-ask-ai-plan.md`](/home/openclaw/astromech/docs/specs/2026-03-22-docusaurus-ask-ai-plan.md)
-- UX inspiration: [`3rdparty-src/mkdocs-ask-ai`](/home/openclaw/astromech/3rdparty-src/mkdocs-ask-ai)
-
-## License
-
-MIT. See [`LICENSE`](/home/openclaw/astromech/3rdparty-src/docusaurus-plugin-aski-ai/LICENSE).
+MIT. See [`LICENSE`](./LICENSE).

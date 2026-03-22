@@ -281,7 +281,7 @@ export default function docusaurusPluginLLMs(
   };
 
   return {
-    name: 'docusaurus-plugin-llms',
+    name: 'docusaurus-plugin-ask-ai',
 
     /**
      * Generates LLM-friendly documentation files after the build is complete

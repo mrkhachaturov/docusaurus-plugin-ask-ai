@@ -125,7 +125,7 @@ testCases.forEach((testCase, index) => {
     } else {
       // Test should not throw an error
       const plugin = docusaurusPluginLLMs(mockContext, testCase.options);
-      if (plugin && plugin.name === 'docusaurus-plugin-llms') {
+      if (plugin && plugin.name === 'docusaurus-plugin-ask-ai') {
         console.log(`  ${index + 1}. PASS: ${testCase.name}`);
         passedTests++;
       } else {

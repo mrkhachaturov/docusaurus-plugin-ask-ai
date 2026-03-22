@@ -1,6 +1,6 @@
 .wrapper {
   position: fixed;
-  bottom: 24px;
+  bottom: 76px;
   right: 24px;
   z-index: 400;
   font-family: var(--ifm-font-family-base);

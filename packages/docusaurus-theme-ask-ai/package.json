@@ -4,9 +4,9 @@
   "description": "Docusaurus theme with floating Use with AI button",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
-  "files": ["lib", "src/theme"],
+  "files": ["lib"],
   "scripts": {
-    "build": "tsc",
+    "build": "tsc && mkdir -p lib/theme/Root && cp src/theme/Root/styles.module.css lib/theme/Root/styles.module.css",
     "watch": "tsc --watch",
     "test": "vitest run"
   },

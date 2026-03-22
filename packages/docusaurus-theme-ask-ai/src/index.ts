@@ -19,7 +19,7 @@ export default function themeAskAi(): Plugin {
     name: 'docusaurus-theme-ask-ai',
 
     getThemePath() {
-      return path.resolve(__dirname, '..', 'src', 'theme');
+      return path.resolve(__dirname, 'theme');
     },
 
     getTypeScriptThemePath() {

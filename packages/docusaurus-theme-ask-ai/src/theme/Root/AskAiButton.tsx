@@ -53,8 +53,9 @@ export function AskAiButton() {
       const normalized = pathname.endsWith('/')
         ? pathname.slice(0, -1)
         : pathname;
+      const manifestPages = manifestRef.current ?? [];
       setIsVisible(
-        manifestRef.current.some(
+        manifestPages.some(
           (p) => p === pathname || p === normalized || p + '/' === pathname,
         ),
       );

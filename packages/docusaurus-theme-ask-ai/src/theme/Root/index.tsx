@@ -1,15 +1,11 @@
 import React from 'react';
 import OriginalRoot from '@theme-original/Root';
 import BrowserOnly from '@docusaurus/BrowserOnly';
-import type { WrapperProps } from '@docusaurus/types';
-import type RootType from '@theme/Root';
 
-type Props = WrapperProps<typeof RootType>;
-
-export default function RootWrapper(props: Props): React.ReactNode {
+export default function RootWrapper({children}: {children: React.ReactNode}): React.ReactNode {
   return (
-    <OriginalRoot {...props}>
-      {props.children}
+    <OriginalRoot>
+      {children}
       <BrowserOnly>
         {() => {
           const { AskAiButton } = require('./AskAiButton');

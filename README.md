@@ -280,7 +280,7 @@ This fork then:
 ## 📁 Repo Layout
 
 ```text
-docusaurus-plugin-aski-ai/
+docusaurus-plugin-ask-ai/
 ├── packages/
 │   ├── docusaurus-plugin-ask-ai/
 │   └── docusaurus-theme-ask-ai/

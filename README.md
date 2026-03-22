@@ -31,6 +31,7 @@ this fork is aimed at that use case.
 - floating "Use with AI" button with two position modes (`fixed` or `breadcrumb`)
 - copy-as-markdown and view-as-markdown actions
 - configurable AI providers with `{prompt}` URL templates
+- optional "Install docs skill" menu item for AI coding agents ([skills CLI](https://github.com/nichochar/skills))
 - build-time route manifest for hiding the button on unsupported pages
 - preserved upstream features like ordering, path transforms, blog inclusion, and custom LLM files
 
@@ -207,11 +208,19 @@ themeConfig: {
         icon: 'claude',
       },
     ],
+    skill: {
+      command: 'npx skills add https://github.com/your-org/your-repo --skill your-docs',
+      name: 'Your Project docs',
+    },
   },
 }
 ```
 
-Provider fields:
+### Skill install
+
+When `skill` is set, a menu item "Install {name} skill" appears in the dropdown. Clicking it copies the command to clipboard. Works with the [skills CLI](https://github.com/nichochar/skills) for installing documentation skills into AI coding agents.
+
+### Provider fields
 
 - `name`: provider label
 - `url`: URL template containing `{prompt}`

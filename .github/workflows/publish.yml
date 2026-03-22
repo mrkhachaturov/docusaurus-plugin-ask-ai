@@ -12,7 +12,6 @@ permissions:
 jobs:
   publish-plugin:
     runs-on: ubuntu-latest
-    environment: npm
     defaults:
       run:
         working-directory: packages/docusaurus-plugin-ask-ai
@@ -33,14 +32,10 @@ jobs:
 
       - run: npm test
 
-      - name: Publish to npm
-        run: npm publish --provenance --access public
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - run: npm publish --provenance --access public
 
   publish-theme:
     runs-on: ubuntu-latest
-    environment: npm
     defaults:
       run:
         working-directory: packages/docusaurus-theme-ask-ai
@@ -61,10 +56,7 @@ jobs:
 
       - run: npm test
 
-      - name: Publish to npm
-        run: npm publish --provenance --access public
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - run: npm publish --provenance --access public
 
   release:
     needs: [publish-plugin, publish-theme]

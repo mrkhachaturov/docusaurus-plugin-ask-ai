@@ -1,8 +1,8 @@
 ---
 title: Home
-description: Welcome to the test docs.
+description: Welcome page
 ---
 
-# Home Page
+# Home
 
-Welcome to the test docs.
+Welcome.

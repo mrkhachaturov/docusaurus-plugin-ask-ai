@@ -528,7 +528,17 @@ export async function generateManifest(
   docs: DocInfo[],
   outDir: string,
 ): Promise<void> {
-  const pages = docs.map((doc) => doc.url);
+  // Store pathnames only (not full URLs) for client-side route matching.
+  // doc.url after generateIndividualMarkdownFiles is a full URL like
+  // "https://site.com/docs/page.md". Extract pathname and strip .md suffix.
+  const pages = docs.map((doc) => {
+    try {
+      const pathname = new URL(doc.url).pathname;
+      return pathname.replace(/\/\/+/g, '/').replace(/\.md$/, '').replace(/\/index$/, '');
+    } catch {
+      return doc.url.replace(/\/\/+/g, '/').replace(/\.md$/, '').replace(/\/index$/, '');
+    }
+  });
   const manifest = JSON.stringify({ pages }, null, 2);
   const manifestPath = path.join(outDir, 'ask-ai-manifest.json');
   await writeFile(manifestPath, manifest);

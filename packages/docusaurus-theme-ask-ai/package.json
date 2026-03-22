@@ -4,9 +4,11 @@
   "description": "Docusaurus theme with floating Use with AI button",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
+  "files": ["lib", "src/theme"],
   "scripts": {
     "build": "tsc",
-    "watch": "tsc --watch"
+    "watch": "tsc --watch",
+    "test": "vitest run"
   },
   "dependencies": {
     "@docusaurus/utils-validation": "^3.0.0"

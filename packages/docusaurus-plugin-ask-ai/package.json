@@ -6,7 +6,8 @@
   "types": "lib/index.d.ts",
   "scripts": {
     "build": "tsc",
-    "watch": "tsc --watch"
+    "watch": "tsc --watch",
+    "test": "for f in tests/test-*.js; do node \"$f\" || exit 1; done"
   },
   "dependencies": {
     "gray-matter": "^4.0.3",

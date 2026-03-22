@@ -47,6 +47,10 @@ export function validateThemeConfig({
       ),
       maxPromptLength: Joi.number().integer().min(100).default(7500),
       providers: Joi.array().items(providerSchema).default(DEFAULT_PROVIDERS),
+      skill: Joi.object({
+        command: Joi.string().required(),
+        name: Joi.string().required(),
+      }).optional(),
     }).default(),
   });
   return validate(schema, themeConfig);

@@ -4,7 +4,7 @@ import { useLocation } from '@docusaurus/router';
 import { Menu } from './Menu';
 import { MenuItem, Divider } from './MenuItem';
 import { Toast } from './Toast';
-import { SparkleIcon, ChevronIcon, CopyIcon, ExternalLinkIcon, FileIcon, resolveIcon } from './icons';
+import { SparkleIcon, ChevronIcon, CopyIcon, ExternalLinkIcon, FileIcon, TerminalIcon, resolveIcon } from './icons';
 import { getMdPath, fetchMarkdown, buildPrompt } from './markdown';
 import type { AskAiThemeConfig } from '../../types';
 import styles from './styles.module.css';
@@ -22,6 +22,7 @@ export function AskAiButton() {
     promptPrefix = 'Use the following {title} documentation to help me:\n\n',
     maxPromptLength = 7500,
     providers = [],
+    skill,
   } = config;
 
   const [isOpen, setIsOpen] = useState(false);
@@ -122,6 +123,17 @@ export function AskAiButton() {
     window.open(finalUrl, '_blank');
   }, [mdPath, promptPrefix, maxPromptLength]);
 
+  const handleSkillInstall = useCallback(async () => {
+    setIsOpen(false);
+    if (!skill) return;
+    try {
+      await navigator.clipboard.writeText(skill.command);
+      setToast('Copied!');
+    } catch {
+      setToast('Copy not supported in this context');
+    }
+  }, [skill]);
+
   if (!isVisible) return null;
 
   return (
@@ -166,16 +178,22 @@ export function AskAiButton() {
             onClick={() => handleProvider(p.url)}
           />
         ))}
+        {(skill || showLlmsTxt) && (providers.length > 0 || showCopyMarkdown || showViewMarkdown) && <Divider />}
+        {skill && (
+          <MenuItem
+            icon={<TerminalIcon size={18} />}
+            title={`Install ${skill.name} skill`}
+            description="Copy install command to clipboard"
+            onClick={handleSkillInstall}
+          />
+        )}
         {showLlmsTxt && (
-          <>
-            {providers.length > 0 && <Divider />}
-            <MenuItem
-              icon={<FileIcon size={18} />}
-              title="llms.txt"
-              description="Full documentation index for LLMs"
-              href={siteConfig.baseUrl + 'llms.txt'}
-            />
-          </>
+          <MenuItem
+            icon={<FileIcon size={18} />}
+            title="llms.txt"
+            description="Full documentation index for LLMs"
+            href={siteConfig.baseUrl + 'llms.txt'}
+          />
         )}
       </Menu>
 

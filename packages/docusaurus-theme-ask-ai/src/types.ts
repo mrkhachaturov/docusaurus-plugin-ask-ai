@@ -18,4 +18,9 @@ export interface AskAiThemeConfig {
   promptPrefix?: string;
   maxPromptLength?: number;
   providers?: AskAiProvider[];
+  /** When set, adds "Install {name} skill" menu item that copies command to clipboard */
+  skill?: {
+    command: string;
+    name: string;
+  };
 }

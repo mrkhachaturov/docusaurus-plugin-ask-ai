@@ -23,6 +23,14 @@
     "@types/node": "^20.6.0",
     "typescript": "^5.2.2"
   },
+  "author": "Ruben Khachaturov",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mrkhachaturov/docusaurus-plugin-ask-ai",
+    "directory": "packages/docusaurus-plugin-ask-ai"
+  },
+  "homepage": "https://github.com/mrkhachaturov/docusaurus-plugin-ask-ai#readme",
+  "bugs": "https://github.com/mrkhachaturov/docusaurus-plugin-ask-ai/issues",
   "engines": { "node": ">=18.0" },
   "license": "MIT"
 }

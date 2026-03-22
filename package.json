@@ -7,5 +7,10 @@
     "build": "npm run build --workspaces",
     "test": "npm run test --workspaces --if-present"
   },
+  "author": "Ruben Khachaturov",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mrkhachaturov/docusaurus-plugin-ask-ai"
+  },
   "engines": { "node": ">=18.0" }
 }

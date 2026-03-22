@@ -4,6 +4,7 @@
   "description": "Docusaurus plugin that generates llms.txt and per-page markdown files",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
+  "files": ["lib"],
   "scripts": {
     "build": "tsc",
     "watch": "tsc --watch",

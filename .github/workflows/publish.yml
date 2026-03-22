@@ -12,6 +12,7 @@ permissions:
 jobs:
   publish-plugin:
     runs-on: ubuntu-latest
+    environment: npm
     defaults:
       run:
         working-directory: packages/docusaurus-plugin-ask-ai
@@ -36,6 +37,7 @@ jobs:
 
   publish-theme:
     runs-on: ubuntu-latest
+    environment: npm
     defaults:
       run:
         working-directory: packages/docusaurus-theme-ask-ai

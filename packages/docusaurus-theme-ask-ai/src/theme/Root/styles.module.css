@@ -1,0 +1,125 @@
+.wrapper {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 400;
+  font-family: var(--ifm-font-family-base);
+}
+
+.trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border-radius: 24px;
+  border: 1px solid var(--ifm-color-emphasis-300);
+  background: var(--ifm-background-color);
+  color: var(--ifm-font-color-base);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+  transition: box-shadow 0.15s, border-color 0.15s;
+}
+
+.trigger:hover {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.18);
+  border-color: var(--ifm-color-primary);
+}
+
+.menu {
+  position: absolute;
+  bottom: calc(100% + 8px);
+  right: 0;
+  min-width: 320px;
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: 12px;
+  background: var(--ifm-background-color);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
+  padding: 6px 0;
+  animation: askAiFade 0.15s ease;
+}
+
+@keyframes askAiFade {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.menuItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  width: 100%;
+  padding: 10px 16px;
+  border: none;
+  background: transparent;
+  text-align: left;
+  cursor: pointer;
+  font-size: 13px;
+  font-family: inherit;
+  color: var(--ifm-font-color-base);
+  text-decoration: none;
+  transition: background 0.15s;
+}
+
+.menuItem:hover {
+  background: var(--ifm-color-emphasis-100);
+}
+
+.menuItemIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  margin-top: 2px;
+  opacity: 0.7;
+  flex-shrink: 0;
+}
+
+.menuItemText {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  min-width: 0;
+}
+
+.menuItemTitle {
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.menuItemDesc {
+  font-size: 12px;
+  color: var(--ifm-color-emphasis-600);
+  line-height: 1.4;
+}
+
+.divider {
+  height: 1px;
+  margin: 4px 0;
+  background: var(--ifm-color-emphasis-200);
+}
+
+.toast {
+  position: fixed;
+  bottom: 80px;
+  right: 24px;
+  padding: 10px 20px;
+  background: var(--ifm-color-primary);
+  color: #fff;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  z-index: 401;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.2s, transform 0.2s;
+  pointer-events: none;
+}
+
+.toastVisible {
+  opacity: 1;
+  transform: translateY(0);
+}

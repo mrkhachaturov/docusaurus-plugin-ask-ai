@@ -403,8 +403,9 @@ export async function generateStandardLLMFiles(
       context.options.keepFrontMatter || [],
       context.options.preserveDirectoryStructure !== false // Default to true
     );
+    await generateManifest(processedDocs, outDir);
   }
-  
+
   // Generate llms.txt
   if (generateLLMsTxt) {
     const llmsTxtPath = path.join(outDir, llmsTxtFilename);
@@ -515,6 +516,23 @@ export async function generateCustomLLMFiles(
       logger.warn(`No matching documents found for custom LLM file: ${customFile.filename}`);
     }
   }
+}
+
+/**
+ * Write ask-ai-manifest.json listing page paths with generated .md files.
+ * Used by docusaurus-theme-ask-ai for route gating.
+ * @param docs - Processed document information
+ * @param outDir - Build output directory
+ */
+export async function generateManifest(
+  docs: DocInfo[],
+  outDir: string,
+): Promise<void> {
+  const pages = docs.map((doc) => doc.url);
+  const manifest = JSON.stringify({ pages }, null, 2);
+  const manifestPath = path.join(outDir, 'ask-ai-manifest.json');
+  await writeFile(manifestPath, manifest);
+  logger.info(`Generated: ${manifestPath}`);
 }
 
 /**

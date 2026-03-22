@@ -38,6 +38,7 @@ export function validateThemeConfig({
   const schema = Joi.object({
     askAi: Joi.object({
       buttonText: Joi.string().default('Use with AI'),
+      position: Joi.string().valid('fixed', 'breadcrumb').default('fixed'),
       showCopyMarkdown: Joi.boolean().default(true),
       showViewMarkdown: Joi.boolean().default(true),
       showLlmsTxt: Joi.boolean().default(true),

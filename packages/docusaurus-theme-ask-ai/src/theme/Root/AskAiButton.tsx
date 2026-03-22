@@ -15,6 +15,7 @@ export function AskAiButton() {
   const config = (siteConfig.themeConfig.askAi ?? {}) as AskAiThemeConfig;
   const {
     buttonText = 'Use with AI',
+    position = 'fixed',
     showCopyMarkdown = true,
     showViewMarkdown = true,
     showLlmsTxt = true,
@@ -124,7 +125,7 @@ export function AskAiButton() {
   if (!isVisible) return null;
 
   return (
-    <div className={styles.wrapper} ref={wrapperRef}>
+    <div className={`${styles.wrapper} ${position === 'breadcrumb' ? styles.wrapperBreadcrumb : ''}`} ref={wrapperRef}>
       <button
         className={styles.trigger}
         onClick={() => setIsOpen((o) => !o)}
@@ -138,7 +139,7 @@ export function AskAiButton() {
         <ChevronIcon size={14} flipped={isOpen} />
       </button>
 
-      <Menu isOpen={isOpen}>
+      <Menu isOpen={isOpen} dropDown={position === 'breadcrumb'}>
         {showCopyMarkdown && (
           <MenuItem
             icon={<CopyIcon size={18} />}

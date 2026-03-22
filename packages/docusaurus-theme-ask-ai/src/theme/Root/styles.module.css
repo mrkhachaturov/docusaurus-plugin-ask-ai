@@ -6,6 +6,15 @@
   font-family: var(--ifm-font-family-base);
 }
 
+/* Breadcrumb position: inline, no fixed positioning */
+.wrapperBreadcrumb {
+  position: relative;
+  bottom: auto;
+  right: auto;
+  z-index: auto;
+  flex-shrink: 0;
+}
+
 .trigger {
   display: inline-flex;
   align-items: center;
@@ -38,6 +47,12 @@
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
   padding: 6px 0;
   animation: askAiFade 0.15s ease;
+}
+
+/* Menu opens downward when in breadcrumb position */
+.menuDropDown {
+  bottom: auto;
+  top: calc(100% + 8px);
 }
 
 @keyframes askAiFade {
@@ -122,4 +137,12 @@
 .toastVisible {
   opacity: 1;
   transform: translateY(0);
+}
+
+/* Toast in breadcrumb mode: below the button */
+.wrapperBreadcrumb .toast {
+  bottom: auto;
+  top: calc(100% + 8px);
+  right: 0;
+  position: absolute;
 }

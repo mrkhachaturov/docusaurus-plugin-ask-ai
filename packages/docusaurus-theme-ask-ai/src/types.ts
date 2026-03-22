@@ -10,6 +10,8 @@ export interface AskAiProvider {
 
 export interface AskAiThemeConfig {
   buttonText?: string;
+  /** 'fixed' = floating bottom-right, 'breadcrumb' = static top-right of content area */
+  position?: 'fixed' | 'breadcrumb';
   showCopyMarkdown?: boolean;
   showViewMarkdown?: boolean;
   showLlmsTxt?: boolean;

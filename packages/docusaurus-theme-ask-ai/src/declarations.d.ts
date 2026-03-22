@@ -4,6 +4,12 @@ declare module '@theme-init/Root' {
   export default function Root(props: {children: ReactNode}): ReactNode;
 }
 
+declare module '@theme-init/DocBreadcrumbs' {
+  import type {ReactNode} from 'react';
+
+  export default function DocBreadcrumbs(props: any): ReactNode;
+}
+
 declare module '@docusaurus/BrowserOnly' {
   import type {ReactNode} from 'react';
 
